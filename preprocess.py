@@ -67,9 +67,11 @@ class Model(object):
         Returns:
             dict: A dict type, json serializable output should be returned.
         """
+        max_tokens = data["max_tokens"]
+        data = data["model_inputs"]
         generated_ids = self.model.generate(
-            **(data["model_inputs"]),
-            max_new_tokens=(data["max_tokens"])
+            **data,
+            max_new_tokens=max_tokens
         )
         generated_ids = [
             output_ids[len(input_ids):] for input_ids, output_ids in zip(data.input_ids, generated_ids)
