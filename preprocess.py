@@ -33,11 +33,11 @@ class Model(object):
         if 'messages' in body:
             messages = body['messages']
             model = body['model']
-            max_tokens = body["max_tokens"]
+            max_tokens = body.get("max_tokens", 1024)
         else:
             prompts = body['prompts']
             model = body['model_name']
-            max_tokens = body["max_tokens"]
+            max_tokens = body.get("max_tokens", 1024)
             messages = []
             for prompt in prompts:
                 messages.append({
